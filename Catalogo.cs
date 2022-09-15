@@ -8,26 +8,20 @@ namespace Practica1CatalogoPeliculas
     class Catalogo
     {
         // Atributos
-        string tituloPelicula;
-        string duracion;
-        string anio;
-        string idioma;
-        string casaProductora;
-        string director;
-        string genero;
+        string tituloPelicula = "";
+        string duracion = "";
+        string anio = "";
+        string idioma = "";
+        string casaProductora = "";
+        string director = "";
+        string genero = "";
 
         static List<Catalogo> Peliculas = new List<Catalogo>();
 
         // Constructores
         public Catalogo()
         {
-            tituloPelicula = "";
-            duracion = "";
-            anio = "";
-            idioma = "";
-            casaProductora = "";
-            director = "";
-            genero = "";
+
         }
 
         // Métodos
@@ -156,7 +150,7 @@ namespace Practica1CatalogoPeliculas
                         Console.Write("\nIngrese el nombre: ");
                         string nom = Console.ReadLine();
                         var validacion = Peliculas[contadorArreglo].ActualizarInfo(nom);
-                        if (!validacion) break;
+                        if (validacion) break;
                         
                         Console.Write("Ingrese la duración: ");
                         string duracion = Console.ReadLine();
@@ -178,7 +172,7 @@ namespace Practica1CatalogoPeliculas
                         break;
 
                     case 2:
-                        for (int i = 0; i <= Peliculas.Count() - 1; i++)
+                        for (int i = Peliculas.Count() - 1; i >= 0; i--)
                         {
                             Console.WriteLine(Peliculas[i].VerInfo());
                         }
