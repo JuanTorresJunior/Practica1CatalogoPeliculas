@@ -42,19 +42,29 @@ namespace Practica1CatalogoPeliculas
             genero = generoParametro;
         }
 
-        public void ActualizarInfo(string nom, string duracionParametro, string anioParametro, string idiomaParametro, string casaProductoraP, string directorParametro, string generoParametro)
+        public bool ActualizarInfo(string nom)
         {
             var PeliculasFiltro = from p in Peliculas where p.tituloPelicula.Equals(nom) select p ;
-            foreach (var item in PeliculasFiltro)
-            {
-                tituloPelicula = nom;
-                duracion = duracionParametro;
-                anio = anioParametro;
-                idioma = idiomaParametro;
-                casaProductora = casaProductoraP;
-                director = directorParametro;
-                genero = generoParametro;
-            }
+            var indice = Peliculas.FindIndex(pelicula => pelicula.tituloPelicula.Equals(nom));
+
+            if (indice == -1) return false;
+
+                Console.Write("\nIngrese el nombre: ");
+                Peliculas[indice].tituloPelicula = Console.ReadLine();
+                Console.Write("Ingrese la duración: ");
+                Peliculas[indice].duracion = Console.ReadLine();
+                Console.Write("Ingrese el año: ");
+                Peliculas[indice].anio = Console.ReadLine();
+                Console.Write("Ingrese el idioma: ");
+                Peliculas[indice].idioma = Console.ReadLine();
+                Console.Write("Ingrese la casa Productora: ");
+                Peliculas[indice].casaProductora = Console.ReadLine();
+                Console.Write("Ingrese el nombre del director: ");
+                Peliculas[indice].director = Console.ReadLine();
+                Console.Write("Ingrese el género: ");
+                Peliculas[indice].genero = Console.ReadLine();
+   
+            return true;
         }
         public string VerInfo()
         {
@@ -145,6 +155,9 @@ namespace Practica1CatalogoPeliculas
                         Peliculas.Add(new Catalogo());
                         Console.Write("\nIngrese el nombre: ");
                         string nom = Console.ReadLine();
+                        var validacion = Peliculas[contadorArreglo].ActualizarInfo(nom);
+                        if (!validacion) break;
+                        
                         Console.Write("Ingrese la duración: ");
                         string duracion = Console.ReadLine();
                         Console.Write("Ingrese el año: ");
@@ -158,9 +171,8 @@ namespace Practica1CatalogoPeliculas
                         Console.Write("Ingrese el género: ");
                         string genero = Console.ReadLine();
 
-                        Peliculas[contadorArreglo].ActualizarInfo(nom, duracion, anio, idioma, casaProductora, director, genero);
-                        Peliculas[contadorArreglo].AgregarPelicula(nom, duracion, anio, idioma, casaProductora, director, genero);
                        
+                        Peliculas[contadorArreglo].AgregarPelicula(nom, duracion, anio, idioma, casaProductora, director, genero);
                         contadorArreglo += 1;
 
                         break;
